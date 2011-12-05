@@ -1,0 +1,351 @@
+/*
+ * LinkedList.h 
+ */
+
+#ifndef LINKEDLIST_H_
+#define LINKEDLIST_H_
+
+#include <stdio.h>
+#include "Node.h"
+
+template<class T>
+class LinkedList
+{
+public:
+	LinkedList();
+	virtual ~LinkedList();
+	LinkedList(const LinkedList& toBeCopied);
+
+	LinkedList& operator=(const LinkedList& rhs);
+	bool operator==(const LinkedList& rhs);
+	bool operator!=(const LinkedList& rhs);
+	T& operator[](int index) const;
+
+	void clear();
+	void insert(int index, T data);
+	void removeIndex(int index);
+	void removeNodeWithData(T data);
+	void push_back(T data);
+	T findDataAtIndex(int index);
+	T pop_back();
+	int size() const;
+
+private:
+
+	Node<T>* head;
+	int actualSize;
+	Node<T>* findLastNode();
+	Node<T>* findNodeAtIndex(int index);
+	bool checkAllElements(Node<T>* runnerRHS,
+			Node<T>* runnerThis, bool notEqualReturn, bool isEqualReturn);
+	void copyFrom(const LinkedList<T> &rhs);
+};
+// Constructor and Destructor
+template<class T>
+LinkedList<T>::LinkedList() :
+	head(NULL), actualSize(0)
+{
+}
+
+template<class T>
+LinkedList<T>::~LinkedList()
+{
+	clear();
+}
+
+// Overloaded Copy Constructor 
+template<class T>
+LinkedList<T>::LinkedList(const LinkedList& toBeCopied) :
+	head(NULL)
+{
+	cout << "Copy Constructor Running:" << endl;
+	for (int index = 0; index < toBeCopied.size(); ++index)
+	{
+		push_back(toBeCopied[index]);
+	}
+	this->actualSize = toBeCopied.size();
+}
+
+// Overloaded '=' Operator 
+template<class T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs)
+{
+	if (this != &rhs)
+	{
+		clear();
+		copyFrom(rhs);
+	}
+	return *this;
+}
+
+// Overloaded '==' Operator 
+template<class T>
+bool LinkedList<T>::operator==(const LinkedList<T>& rhs)
+{
+	Node<T>* runnerRHS = rhs.head;
+	Node<T>* runnerThis = this->head;
+
+	if (rhs.size() != size())
+	{
+		return false;
+	}
+	else
+	{
+		return checkAllElements(runnerRHS, runnerThis, false, true);
+	}
+}
+
+// Overloaded '!=' Operator
+template<class T>
+bool LinkedList<T>::operator!=(const LinkedList& rhs)
+{
+	Node<T>* runnerRHS = rhs.head;
+	Node<T>* runnerThis = this->head;
+
+	if (rhs.size() != size())
+	{
+		return true;
+	}
+	else
+	{
+		return checkAllElements(runnerRHS, runnerThis, true, false);
+	}
+}
+
+// Overloaded '[]' Operator (for indexing list)
+template<class T>
+T& LinkedList<T>::operator[](int index) const
+{
+	Node<T>* nodeAtIndex = head;
+	while (index > 0)
+	{
+		nodeAtIndex = nodeAtIndex->getNext();
+		index--;
+	}
+	return nodeAtIndex->getDataReference();
+	//return this->findNodeAtIndex(index)->getDataReference();
+}
+
+// Add Node to the list
+template<class T>
+void LinkedList<T>::push_back(T data)
+{
+	Node<T>* newNode = new Node<T> (data);
+	//check for the special case of an empty list
+	if (head == NULL)
+	{
+		head = newNode;
+	}
+	else
+	{
+		Node<T>* LastNode = findLastNode();
+		LastNode->setNext(newNode);
+	}
+	this->actualSize++;
+}
+
+// Returns the last node in the list
+template<class T>
+Node<T>* LinkedList<T>::findLastNode()
+{
+	// Already checked for special case of an empty list
+	Node<T>* lastNode = head;
+	while (lastNode->getNext() != NULL)
+	{
+		lastNode = lastNode->getNext();
+	}
+	return lastNode;
+}
+
+// Empty out List
+template<class T>
+void LinkedList<T>::clear()
+{
+	if (this->size() > 0)
+	{
+		Node<T>* nextDelete = this->head->getNext();
+		while (this->head->getNext() != NULL)
+		{
+			delete this->head;
+			this->head = nextDelete;
+			nextDelete = this->head->getNext();
+		}
+		delete nextDelete;
+		delete this->head;
+		this->actualSize = 0;
+	}
+}
+
+// Insert node at specific index
+template<class T>
+void LinkedList<T>::insert(int index, T data)
+{
+	//check if index is greater or equal to size and if so use push back for insertion
+	if (index >= this->size())
+	{
+		push_back(data);
+	}
+	else if (index == 0)
+	{
+		Node<T>* newNode = new Node<T> (data);
+		//check for the special case of an empty list
+		if (head == NULL)
+		{
+			head = newNode;
+		}
+		else
+		{
+			newNode->setNext(head);
+			head = newNode;
+			this->actualSize++;
+		}
+	}
+	else
+	{
+		//create the node that is to be inserted at desired index
+		Node<T>* newNode = new Node<T> (data);
+		//find the node before the desired index so that we can insert the newNode AT the desired index
+		Node<T>* nodeBeforeIndex = findNodeAtIndex(index - 1);
+		//set newNode's next to nodeBeforeIndex's next
+		newNode->setNext(nodeBeforeIndex->getNext());
+		//set nodeBeforeIndex's next to newNode
+		nodeBeforeIndex->setNext(newNode);
+		this->actualSize++;
+	}
+
+}
+// Returns a node at a specific index
+template<class T>
+Node<T>* LinkedList<T>::findNodeAtIndex(int index)
+{
+	Node<T>* nodeAtIndex;
+	nodeAtIndex = head;
+	int thisIndex = 0;
+	while (thisIndex != index)
+	{
+		nodeAtIndex = nodeAtIndex->getNext();
+		thisIndex++;
+	}
+	return nodeAtIndex;
+}
+// Removes the node at the specific index
+template<class T>
+void LinkedList<T>::removeIndex(int index)
+{
+	//create the node that is to be deleted
+	Node<T>* nodeToBeDeleted;
+	//find the node before the desired index so that we can delete node at desired index
+	Node<T>* nodeBeforeIndex = findNodeAtIndex(index - 1);
+	//set nodeToBeDeleted to tempNode's next
+	nodeToBeDeleted = nodeBeforeIndex->getNext();
+	//set tempNode's next to nodeToBeDeleted's next
+	nodeBeforeIndex->setNext(nodeToBeDeleted->getNext());
+	nodeToBeDeleted->setNext(NULL);
+	delete nodeToBeDeleted;
+	this->actualSize--;
+
+}
+
+// Removes a node with a specific data value
+template<class T>
+void LinkedList<T>::removeNodeWithData(T data)
+{
+	Node<T>* nodeBeforeData;
+	nodeBeforeData = head;
+	while (nodeBeforeData->getNext()->getData() != data)
+	{
+		nodeBeforeData = nodeBeforeData->getNext();
+	}
+	//create the node that is to be deleted
+	Node<T>* nodeToBeDeleted;
+	//set nodeToBeDeleted to tempNode's next
+	nodeToBeDeleted = nodeBeforeData->getNext();
+	//set tempNode's next to nodeToBeDeleted's next
+	nodeBeforeData->setNext(nodeToBeDeleted->getNext());
+	nodeToBeDeleted->setNext(NULL);
+	delete nodeToBeDeleted;
+	this->actualSize--;
+}
+
+// Deletes the last node in the list 
+template<class T>
+T LinkedList<T>::pop_back()
+{
+	//check for the special case of an empty list
+	if (head == NULL)
+	{
+		//nothing to pop List is empty
+		return 0;
+	}
+	else
+	{
+		Node<T>* lastNode = findLastNode();
+		Node<T>* previousNode = head;
+		while (previousNode->getNext() != lastNode)
+		{
+			previousNode = previousNode->getNext();
+		}
+		previousNode->setNext(NULL);
+		T data = lastNode->getData();
+		delete lastNode;
+		this->actualSize--;
+		return data;
+	}
+}
+
+// Returns the size of the list
+template<class T>
+int LinkedList<T>::size() const
+{
+	return this->actualSize;
+}
+
+// Returns the data that is at the specific Index
+template<class T>
+T LinkedList<T>::findDataAtIndex(int index)
+{
+	if (this->size() == 0)
+	{
+		return NULL;
+	}
+	else if (index > this->size())
+	{
+		return NULL;
+	}
+	else
+	{
+		Node<T>* myNode = this->findNodeAtIndex(index);
+		return myNode->getData();
+	}
+}
+
+template<class T>
+void LinkedList<T>::copyFrom(const LinkedList<T> & rhs)
+{
+	Node<T>* runner = rhs.head;
+	this->clear();
+	head = new Node<T> (runner->getData());
+	while (runner->getNext() != NULL)
+	{
+		runner = runner->getNext();
+		push_back(runner->getData());
+	}
+	actualSize = rhs.actualSize;
+}
+
+template<class T>
+bool LinkedList<T>::checkAllElements(Node<T>* runnerRHS, Node<T>* runnerThis,
+		bool notEqualReturn, bool isEqualReturn)
+{
+	while (runnerThis->getNext() != NULL)
+	{
+		if (runnerThis->getData() != runnerRHS->getData())
+		{
+			return notEqualReturn;
+		}
+		runnerThis = runnerThis->getNext();
+		runnerRHS = runnerRHS->getNext();
+	}
+	return isEqualReturn;
+}
+#endif /* LINKEDLIST_H_ */
