@@ -1,0 +1,23 @@
+﻿Build started 8/17/2011 11:13:14 PM.
+     1>Project "c:\Users\john grabanski\documents\visual studio 2010\Projects\OneMax\OneMax\OneMax.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\OneMax.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt Driver.cpp
+         Driver.cpp
+     1>Driver.cpp(126): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>Driver.cpp(141): error C2057: expected constant expression
+     1>Driver.cpp(141): error C2466: cannot allocate an array of constant size 0
+     1>Driver.cpp(141): error C2133: 'threadHandles' : unknown size
+     1>Driver.cpp(142): error C2057: expected constant expression
+     1>Driver.cpp(142): error C2466: cannot allocate an array of constant size 0
+     1>Driver.cpp(142): error C2133: 'threadID' : unknown size
+     1>Driver.cpp(275): warning C4244: 'initializing' : conversion from 'double' to 'unsigned int', possible loss of data
+     1>Driver.cpp(293): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>Driver.cpp(380): warning C4244: 'initializing' : conversion from 'double' to 'unsigned int', possible loss of data
+     1>Driver.cpp(396): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>Done Building Project "c:\Users\john grabanski\documents\visual studio 2010\Projects\OneMax\OneMax\OneMax.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.38

@@ -1,0 +1,1 @@
+Artificial Intelligence Exercises.  Working on Wompus World currently. Will be adding more as time allows.

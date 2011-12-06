@@ -1,0 +1,1 @@
+Parallel Programming work.  Bucket Sort and One Max have been tested, and Bitonic Sort is on its way to testing. Will be adding the report document for each of these when I can get the time. I also plan on making each of these object oriented when time allows.
