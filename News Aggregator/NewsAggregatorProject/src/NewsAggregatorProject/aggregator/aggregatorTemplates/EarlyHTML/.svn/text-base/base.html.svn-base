@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>{% block title %}Homepage{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+{% block pageLayout %}
+<body>
+<table>
+<tr>
+	
+	<h1>{% block heading %}Homepage Headlines{% endblock %}</h1>
+		
+</tr>
+<tr>
+	<td>
+		<ul>
+      		<li><a href='/home'>Home</a></li>
+      		<li><a href='/world'>World</a></li>
+		</ul>
+	</td>
+	<td>
+	
+	{% block body %}<p>This is Homepage's body, it will contain the headline articles and any site news.</p>{% endblock %}
+	
+	</td>
+	<td>
+		<ul>
+			{% block userNav %}
+			<li>This is for User Navigation</li>
+			<li><a href='/login'>Login</a></li>
+			{% endblock %}
+		</ul>
+	</td>
+</tr>
+<tr>
+	{% block footer %}
+	<table>
+		<tr>
+			<td>Carl Haufle, John Grabanski</td>
+			<td>--</td>
+			<td><a href='/about'>About NewsForYou</a></td>
+			<td>--</td>
+			<td><a href='/contact'>Contact Us</a></td>
+		</tr>
+	</table>
+	{% endblock %}
+</tr>
+</table>
+</body>
+{% endblock %}
+</html>

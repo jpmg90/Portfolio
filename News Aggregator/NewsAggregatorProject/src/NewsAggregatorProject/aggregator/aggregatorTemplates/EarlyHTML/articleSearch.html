@@ -1,0 +1,29 @@
+<head>
+	<title>Search{% if query %} Results{% endif %}</title>
+</head>
+<body>
+	<h1>Search</h1>
+	{% block searchLayout %}
+		<form action="." method="GET">
+			<label for="q">Search: </label>
+			<input type="text" name="q" value="{{ query|escape }}">
+			<input type="submit" value="Search">
+		</form>
+		
+		{% if query %}
+			<h2>Results for "{{ query|escape }}": </h2>
+		
+			{% if results %}
+				<ul>
+				{% for article in results %}
+					<li>{{ article|escape }}</li>
+			{% endfor %}
+				</ul>
+			{% else %}
+				<p> No articles found </p>
+			{% endif %}
+		{% endif %}
+	{% endblock%}
+		
+</body>
+</html>

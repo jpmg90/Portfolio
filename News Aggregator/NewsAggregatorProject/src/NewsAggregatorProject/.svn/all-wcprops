@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/Fall2011/!svn/ver/1747/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject
+END
+manage.py
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Fall2011/!svn/ver/1747/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject/manage.py
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Fall2011/!svn/ver/1801/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject/views.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Fall2011/!svn/ver/1747/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject/__init__.py
+END
+settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Fall2011/!svn/ver/1801/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject/settings.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Fall2011/!svn/ver/1808/Phil%20Hartley/CSC413%20FA11267/Students/John%20Grabanski/NewsAggregatorProject/src/NewsAggregatorProject/urls.py
+END

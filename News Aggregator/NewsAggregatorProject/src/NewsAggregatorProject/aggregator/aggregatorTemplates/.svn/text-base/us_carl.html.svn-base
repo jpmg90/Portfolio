@@ -1,0 +1,19 @@
+{% extends "base_carl.html" %}
+{% block title %}US News{% endblock %}
+
+{% block content %}
+   	<h1>US News Headlines</h1>
+   	<!-- For loop over Top articles -->
+   	<p><a href="#">Headline 1:</a></p>
+   	<p><a href="#">Headline 2:</a></p>
+   	<p><a href="#">Headline 3:</a></p>
+   	<h2>US News Articles:</h2>
+   	<!-- For loop over newest articles -->
+   	<p><a href="#">Article 1:</a></p>
+   	<p><a href="#">Article 2:</a></p>
+   	<p><a href="#">Article 3:</a></p>
+   	<p><a href="#">Article 4:</a></p>
+	<p>...</p>
+   	<p><a href="#">Article 15:</a></p>
+	<p>&nbsp;</p>
+{% endblock%}

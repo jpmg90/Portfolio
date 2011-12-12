@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Contact us{% endblock %}
+
+{% block heading %}Contact us{% endblock %}
+
+{% block body %}
+	<form action="." method="POST">
+		<div class = "fieldWrapper">
+			{{ form.topic.errors }}
+			<label for = "id_topic">What kind of feedback:</label>
+			{{ form.topic }}
+		</div>
+		<div class="fieldWrapper{% if form.message.errors %} errors{% endif %}">
+			{% if form.message.errors %}
+				<ol>
+				{% for error in form.message.errors %}
+					<li><strong>{{ error|escape }}</strong></li>
+				{% endfor %}
+				</ol>
+			{% endif %}
+			{{ form.message }}
+		</div>
+		<div class = "fieldWrapper">
+			{{ form.sender.errors }}
+			<label for = "id_sender">Your email (optional):</label>
+			{{ form.sender }}
+		</div>
+		<p><input type="submit" value="Submit"></p>
+	</form>
+{% endblock %}

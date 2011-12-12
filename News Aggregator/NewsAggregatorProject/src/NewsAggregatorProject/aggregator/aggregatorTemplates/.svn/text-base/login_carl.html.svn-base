@@ -1,0 +1,10 @@
+{% extends "base_carl.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	<!-- Add forms for user input and logging in -->
+   	<h1>Username: </h1>
+    <p>&nbsp;</p>
+    <h2>Password: </h2>
+    <p>&nbsp;</p>
+{% endblock%}
